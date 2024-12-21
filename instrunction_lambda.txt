@@ -1,0 +1,47 @@
+1. create a Lambda function
+Go to AWS Console → Lambda → Create Function
+Choose "Author from scratch"
+Name your function (e.g., "image-resizer")
+Runtime: Choose Python (3.9 or newer)
+Architecture: x86_64 (default)
+Click "Create function"
+
+2. Download necessary libraries.
+Run below to download libraries in the folers.
+mkdir libs
+pip install Pillow -t libs
+
+3. Make zip file, and put the libraries and python code in it.
+In python file, make sure the download and upload folders are different. 
+(otherwise, it will end up in an infinite loop) 
+
+4. Upload the deployment package:
+In AWS Lambda console → Code tab (scroll below)
+Click "Upload from" → ".zip file"
+Upload your deployment.zip
+
+5. Configure S3 trigger:
+In Lambda console → Configuration → Triggers → Add trigger
+Select S3
+Choose your S3 bucket
+Event type: select "All object create events"
+Optional: Add prefix (e.g., "uploads/") to only trigger for specific folders
+Click "Add"
+
+6. Set up permissions: Lambda needs permissions to access S3
+In Configuration → Permissions
+Click the role name under "Execution role"
+In IAM console, add "AmazonS3FullAccess" permision policy.
+
+7. optional configuration.
+Configure memory and timeout:
+Go to Configuration → General configuration
+Set Memory to at least 256MB (more if processing large images)
+Set Timeout to around 30 seconds (adjust based on your needs)
+
+To test:
+Upload an image to your S3 bucket
+Check the "resized/" folder in the same bucket
+View Lambda logs in CloudWatch to debug any issues
+
+
