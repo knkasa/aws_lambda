@@ -31,6 +31,7 @@ Click "Add"
 Optional:
 If you want to schedule an event, choose EventBridge instead of s3,
 then type cron time to schedule a trigger.
+If you need credential such as password, store them in secret manager.
 
 6. Set up permissions: Lambda needs permissions to access S3
 In Configuration → Permissions
