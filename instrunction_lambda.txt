@@ -28,6 +28,10 @@ Event type: select "All object create events"
 Optional: Add prefix (e.g., "uploads/") to only trigger for specific folders
 Click "Add"
 
+Optional:
+If you want to schedule an event, choose EventBridge instead of s3,
+then type cron time to schedule a trigger.
+
 6. Set up permissions: Lambda needs permissions to access S3
 In Configuration → Permissions
 Click the role name under "Execution role"
